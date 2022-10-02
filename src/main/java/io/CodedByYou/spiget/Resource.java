@@ -1,9 +1,6 @@
 package io.CodedByYou.spiget;
 
-import com.sun.org.apache.regexp.internal.RE;
 import io.CodedByYou.spiget.cUtils.U;
-import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.TagNode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
