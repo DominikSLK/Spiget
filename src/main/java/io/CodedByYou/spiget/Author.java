@@ -19,15 +19,15 @@ public class Author {
         xAuthor = U.getResource("author",resourceid);
         Name = xAuthor.getString("name");
         id = xAuthor.getInt("id");
-        JSONObject form_data = xAuthor.getJSONObject("icon");
-        icon = "https://spigotmc.org/" + form_data.getString("url");
+        //JSONObject form_data = xAuthor.getJSONObject("icon");
+        //icon = "https://spigotmc.org/" + form_data.getString("url");
     }
     private Author (int id) throws Exception{
         xAuthor = U.getAuthor(id);
         Name = xAuthor.getString("name");
         id = xAuthor.getInt("id");
-        JSONObject form_data = xAuthor.getJSONObject("icon");
-        icon = "https://spigotmc.org/" + form_data.getString("url");
+        //JSONObject form_data = xAuthor.getJSONObject("icon");
+        //icon = "https://spigotmc.org/" + form_data.getString("url");
     }
 
     public static Author getByName(String name)throws Exception{
