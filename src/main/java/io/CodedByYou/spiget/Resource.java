@@ -37,7 +37,7 @@ public class Resource {
     private String description,descriptionAsXml;
     public Resource(String resourcename) throws Exception {
         this.resourcename = resourcename;
-        resoure = get("");
+        resoure = get("").getJSONObject(0);
         resourceid = resoure.getInt("id");
         resoure = U.getResource(null,resourceid);
         this.resourcename = resoure.getString("name");
@@ -112,7 +112,7 @@ public class Resource {
 
         author = Author.getByResource(resourceid);
     }
-    private JSONObject get(String x)throws Exception{
+    private JSONArray get(String x)throws Exception{
         String url = "https://api.spiget.org/v2/search/resources/"+resourcename+"/"+x;
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -132,9 +132,7 @@ public class Resource {
         //print in String
         //Read JSON response and print
         String res = response.toString();
-        res = res.replaceFirst( "\\[","");
-        res = res.replaceFirst( "\\]","");
-        return new JSONObject(res);
+        return new JSONArray(res);
     }
     public String getResourceIconLink() {
         return resourceIconLink;

@@ -29,8 +29,8 @@ public class ResourceList {
         JSONArray ja = new JSONArray(text);
 
         for (Object obj : ja) {
-            JSONObject json = new JSONObject(obj);
-            resourceList.add(new Resource(json.get("name").toString()));
+            JSONObject json = new JSONObject(String.valueOf(obj));
+            resourceList.add(new Resource(Integer.parseInt(json.get("id").toString())));
         }
     }
 
