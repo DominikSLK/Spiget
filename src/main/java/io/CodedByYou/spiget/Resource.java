@@ -88,6 +88,7 @@ public class Resource {
         description = descriptionAsXml;
         description=description.replaceAll("<.*?>", "");
         description = description.replaceAll("(?m)^[ \t]*\r?\n", "");
+        resourceIconLink = "https://www.spigotmc.org/" + resoure.getJSONObject("icon").getString("url");
         likes = resoure.getInt("likes");
         links = new ArrayList<>();
         JSONObject object = resoure.getJSONObject("links");
