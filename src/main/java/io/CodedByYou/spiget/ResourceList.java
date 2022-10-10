@@ -19,6 +19,10 @@ public class ResourceList {
     List<Resource> resourceList = new ArrayList<>();
 
     public ResourceList(int size, String fields, String sort) throws Exception {
+        new ResourceList(-1, size, fields, sort);
+    }
+
+    public ResourceList(int start, int size, String fields, String sort) throws Exception {
         URL url = new URL( "https://api.spiget.org/v2/resources/free/?size=" + size + "&fields=" + fields + "&sort=" + sort);
         HttpURLConnection http = (HttpURLConnection) url.openConnection();
         http.setRequestProperty("Accept", "application/json");
@@ -28,9 +32,13 @@ public class ResourceList {
 
         JSONArray ja = new JSONArray(text);
 
+        int count = 0;
         for (Object obj : ja) {
-            JSONObject json = new JSONObject(String.valueOf(obj));
-            resourceList.add(new Resource(Integer.parseInt(json.get("id").toString())));
+            if(count > start) {
+                JSONObject json = new JSONObject(String.valueOf(obj));
+                resourceList.add(new Resource(Integer.parseInt(json.get("id").toString())));
+            }
+            count++;
         }
     }
 
