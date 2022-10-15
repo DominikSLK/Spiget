@@ -35,6 +35,7 @@ public class Resource {
     private List<String> links;
     private List<String> testedVersions;
     private String description,descriptionAsXml;
+    private int version;
     public Resource(String resourcename) throws Exception {
         this.resourcename = resourcename;
         resoure = get("").getJSONObject(0);
@@ -52,6 +53,11 @@ public class Resource {
         description = descriptionAsXml;
         description=description.replaceAll("<.*?>", "");
         description = description.replaceAll("(?m)^[ \t]*\r?\n", "");
+
+        JSONArray version_arr = new JSONArray(resoure.get("versions"));
+        JSONObject version_obj = new JSONObject(version_arr.get(0));
+        version = Integer.parseInt(version_obj.get("id").toString());
+
         links = new ArrayList<>();
         JSONObject object = resoure.getJSONObject("links");
         String o = object.toString();
@@ -89,6 +95,11 @@ public class Resource {
         description=description.replaceAll("<.*?>", "");
         description = description.replaceAll("(?m)^[ \t]*\r?\n", "");
         resourceIconLink = "https://www.spigotmc.org/" + resoure.getJSONObject("icon").getString("url");
+
+        JSONArray version_arr = new JSONArray(resoure.get("versions"));
+        JSONObject version_obj = new JSONObject(version_arr.get(0));
+        version = Integer.parseInt(version_obj.get("id").toString());
+
         likes = resoure.getInt("likes");
         links = new ArrayList<>();
         JSONObject object = resoure.getJSONObject("links");
@@ -201,6 +212,10 @@ public class Resource {
 
     public List<String> getTestedVersions() {
         return testedVersions;
+    }
+
+    public int getVersion() {
+        return version;
     }
 
 }
