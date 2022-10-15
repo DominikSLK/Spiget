@@ -54,8 +54,8 @@ public class Resource {
         description=description.replaceAll("<.*?>", "");
         description = description.replaceAll("(?m)^[ \t]*\r?\n", "");
 
-        JSONArray version_arr = new JSONArray(resoure.get("versions"));
-        JSONObject version_obj = new JSONObject(version_arr.get(0));
+        JSONArray version_arr = new JSONArray(resoure.get("versions").toString());
+        JSONObject version_obj = version_arr.getJSONObject(0);
         version = Integer.parseInt(version_obj.get("id").toString());
 
         links = new ArrayList<>();
@@ -96,8 +96,8 @@ public class Resource {
         description = description.replaceAll("(?m)^[ \t]*\r?\n", "");
         resourceIconLink = "https://www.spigotmc.org/" + resoure.getJSONObject("icon").getString("url");
 
-        JSONArray version_arr = new JSONArray(resoure.get("versions"));
-        JSONObject version_obj = new JSONObject(version_arr.get(0));
+        JSONArray version_arr = new JSONArray(resoure.get("versions").toString());
+        JSONObject version_obj = version_arr.getJSONObject(0);
         version = Integer.parseInt(version_obj.get("id").toString());
 
         likes = resoure.getInt("likes");
