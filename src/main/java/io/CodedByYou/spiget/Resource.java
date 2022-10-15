@@ -5,10 +5,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -121,18 +121,8 @@ public class Resource {
         con.setRequestMethod("GET");
         //add request header
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        int responseCode = con.getResponseCode();
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        //print in String
-        //Read JSON response and print
-        String res = response.toString();
+        InputStream inputStream = con.getInputStream();
+        String res = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         return new JSONArray(res);
     }
     public String getResourceIconLink() {

@@ -2,10 +2,10 @@ package io.CodedByYou.spiget.cUtils;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by CodedByYou on 10/9/2017.
@@ -22,19 +22,8 @@ public class U {
         }
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        // optional default is GET
-        int responseCode = con.getResponseCode();
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        //print in String
-        //Read JSON response and print
-        String res = response.toString();
+        InputStream inputStream = con.getInputStream();
+        String res = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         if(x != null) {
             res = res.replaceFirst("\\[", "");
             res = res.replaceFirst("\\]", "");
@@ -48,16 +37,8 @@ public class U {
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        int responseCode = con.getResponseCode();
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        String res = response.toString();
+        InputStream inputStream = con.getInputStream();
+        String res = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         res = res.replaceFirst( "\\[","");
         res = res.replaceFirst( "\\]","");
         return new JSONObject(res);
@@ -67,16 +48,8 @@ public class U {
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        int responseCode = con.getResponseCode();
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        String res = response.toString();
+        InputStream inputStream = con.getInputStream();
+        String res = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         res = res.replaceFirst( "\\[","");
         res = res.replaceFirst( "\\]","");
         return new JSONObject(res);
