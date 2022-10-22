@@ -73,11 +73,8 @@ public class Resource {
             testedVersions.add(array.getString(i));
         }
         JSONObject ox = resoure.getJSONObject("file");
-        downloadLink = "https://www.spigotmc.org/"+ox.getString("url");
-        String z = resourcename;
-        z = z.replaceAll(" - ","-");
-        z = z.replaceAll(" ","-");
-        resourceLink = "https://spigotmc.org/resources/"+z+"."+ resourceid;
+        downloadLink = "https://www.spigotmc.org/" + ox.getString("url");
+        resourceLink = "https://spigotmc.org/" + ox.getString("url").replaceAll("/download\\?version=.*", "");
 
         author = Author.getByResource(resourceid);
     }
@@ -116,11 +113,8 @@ public class Resource {
             testedVersions.add(array.getString(i));
         }
         JSONObject ox = resoure.getJSONObject("file");
-        downloadLink = "https://www.spigotmc.org/"+ox.getString("url");
-        String z = resourcename;
-        z = z.replaceAll(" - ","-");
-        z = z.replaceAll(" ","-");
-        resourceLink = "https://spigotmc.org/resources/"+z+"."+ resourceid;
+        downloadLink = "https://www.spigotmc.org/" + ox.getString("url");
+        resourceLink = "https://spigotmc.org/" + ox.getString("url").replaceAll("/download\\?version=.*", "");
 
         author = Author.getByResource(resourceid);
     }
