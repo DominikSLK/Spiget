@@ -98,9 +98,16 @@ public class Resource {
         description = description.replaceAll("(?m)^[ \t]*\r?\n", "");
         resourceIconLink = "https://www.spigotmc.org/" + resoure.getJSONObject("icon").getString("url");
 
-        JSONArray version_arr = new JSONArray(resoure.get("versions").toString());
-        JSONObject version_obj = version_arr.getJSONObject(0);
-        version = Integer.parseInt(version_obj.get("id").toString());
+        JSONObject ox = resoure.getJSONObject("file");
+
+        //Some resources don't have versions... Try to get version from url...
+        try {
+            JSONArray version_arr = new JSONArray(resoure.get("versions").toString());
+            JSONObject version_obj = version_arr.getJSONObject(0);
+            version = Integer.parseInt(version_obj.get("id").toString());
+        } catch (JSONException je) {
+            version = Integer.parseInt(ox.getString("url").split("\\?version=")[1]);
+        }
 
         likes = resoure.getInt("likes");
         links = new ArrayList<>();
@@ -117,7 +124,7 @@ public class Resource {
         for(int i = 0; i < array.length();i++){
             testedVersions.add(array.getString(i));
         }
-        JSONObject ox = resoure.getJSONObject("file");
+
         downloadLink = "https://www.spigotmc.org/" + ox.getString("url");
         resourceLink = "https://spigotmc.org/" + ox.getString("url").replaceAll("/download\\?version=.*", "");
 
