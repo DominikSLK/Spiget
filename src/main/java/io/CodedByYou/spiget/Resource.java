@@ -82,7 +82,12 @@ public class Resource {
         this.resourceid = resourceid;
         resoure = U.getResource(null,resourceid);
         this.resourcename = resoure.getString("name");
-        permium = (Boolean) resoure.get("premium");
+        // Sometimes resource dont have premium field
+        try {
+            permium = (Boolean) resoure.get("premium");
+        } catch (JSONException je) {
+            permium = false;
+        }
         price = resoure.getInt("price");
         releaseDate = resoure.getInt("releaseDate");
         downloads = resoure.getInt("downloads");
